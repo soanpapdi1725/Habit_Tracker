@@ -4,7 +4,7 @@ import { deleteHabit } from "@/src/store/slices/habitSlice";
 import { getLast7Days, getStreak } from "@/src/utils/streaks";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Alert, Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function HistoryScreen() {
@@ -33,34 +33,15 @@ export default function HistoryScreen() {
 
   const streak = getStreak(habit.completedDates);
   const days = getLast7Days();
-  const totalDone = days.filter((day) => habit.completedDates.includes(day.date)).length;
-
-  const handleDelete = () => {
-    Alert.alert(
-      "Delete Habit",
-      `Are you sure you want to delete "${habit.name}"? This cannot be undone.`,
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => {
-            dispatch(deleteHabit({ id: habit.id }));
-            router.back();
-          },
-        },
-      ],
-    );
-  };
+  const totalDone = days.filter((day) =>
+    habit.completedDates.includes(day.date),
+  ).length;
 
   return (
     <ScreenWrapper>
       {/* Back */}
       <View className="pt-4 pb-2 ">
-        <Pressable
-          className="flex-row max-w-20"
-          onPress={() => router.back()}
-        >
+        <Pressable className="flex-row max-w-20" onPress={() => router.back()}>
           <FontAwesome6 name="arrow-left-long" size={24} color="#818CF8" />
         </Pressable>
       </View>
@@ -124,7 +105,10 @@ export default function HistoryScreen() {
       {/* Delete */}
       <View className="mt-auto pb-8">
         <Pressable
-          onPress={handleDelete}
+          onPress={() => {
+            dispatch(deleteHabit({ id: habit.id }));
+            router.back();
+          }}
           className="bg-danger-soft rounded-xl py-4 items-center active:opacity-70"
         >
           <Text className="text-danger text-base font-semibold">
