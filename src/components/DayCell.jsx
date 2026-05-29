@@ -1,12 +1,14 @@
+import Entypo from "@expo/vector-icons/Entypo";
 import React from "react";
-import { View, Text } from "react-native";
-import Entypo from '@expo/vector-icons/Entypo';
+import { Text, View } from "react-native";
 export default function DayCell({ day, isCompleted }) {
   return (
     <View className="items-center gap-1.5">
       {/* Day of week label */}
-      <Text className="text-[11px] font-medium text-txt-muted uppercase tracking-wider">
-        {day.dayOfWeek}
+      <Text
+        className={`text-[11px]  uppercase tracking-wider ${day.isToday ? "font-bold text-txt-primary" : "font-medium text-txt-muted"}`}
+      >
+        {day.isToday ? "Today" : day.dayOfWeek}
       </Text>
 
       {/* Circle indicator */}
@@ -18,9 +20,19 @@ export default function DayCell({ day, isCompleted }) {
         } ${day.isToday ? "border-[2.5px]" : ""}`}
       >
         {isCompleted ? (
-          <Entypo name="check" className="text-base font-semibold" size={24} color="#34D399" />
+          <Entypo
+            name="check"
+            className="text-base font-semibold"
+            size={24}
+            color="#34D399"
+          />
         ) : (
-          <Entypo name="cross" className="text-base font-semibold text-gray-500" size={24} color="red" />
+          <Entypo
+            name="cross"
+            className="text-base font-semibold text-gray-500"
+            size={24}
+            color="red"
+          />
         )}
       </View>
 
