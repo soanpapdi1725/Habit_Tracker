@@ -1,15 +1,15 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { configureStore } from "@reduxjs/toolkit";
 import {
-  persistStore,
-  persistReducer,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from "redux-persist";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import habitReducer from "./slices/habitSlice";
 
 const persistConfig = {
