@@ -11,27 +11,16 @@ import dayjs from "dayjs";
  * @param {string} [today] - Override for today's date (for testing)
  * @returns {number} Current streak count
  */
-export function getStreak(
-  completedDates,
-  today = dayjs().format("YYYY-MM-DD"),
-) {
-  const todayStr = today;
-  const dateSet = new Set(completedDates);
-  console.log(dateSet.has(todayStr))
-  if (!dateSet.has(todayStr)) {
-    return 0;
-  }
 
+export const getStreak = (completedDates) => {
+  let day = dayjs();
   let streak = 0;
-  let current = dayjs(todayStr);
-
-  while (dateSet.has(current.format("YYYY-MM-DD"))) {
+  while (completedDates.includes(day.format("YYYY-MM-DD"))) {
     streak++;
-    current = current.subtract(1, "day");
+    day = day.subtract(1, "day");
   }
-
   return streak;
-}
+};
 
 /**
  * Get the last 7 days as an array of objects.
