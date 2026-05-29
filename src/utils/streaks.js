@@ -33,11 +33,11 @@ export function getLast7Days(today) {
   const days = [];
 
   for (let i = 6; i >= 0; i--) {
-    const d = todayDate.subtract(i, "day");
+    const day = todayDate.subtract(i, "day");
     days.push({
-      date: d.format("YYYY-MM-DD"),
-      label: d.format("DD"),
-      dayOfWeek: d.format("ddd"),
+      date: day.format("YYYY-MM-DD"),
+      label: day.format("DD"),
+      dayOfWeek: day.format("ddd"),
       isToday: i === 0,
     });
   }

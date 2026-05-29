@@ -13,8 +13,8 @@ export default function RootLayout() {
 
         <Stack
           screenOptions={{
-            animation: "none",
-            animationDuration: 100,
+            animation: "slide_from_bottom",
+            animationDuration: 500,
             headerShown: false,
             contentStyle: { backgroundColor: "#0F0F14" },
           }}
